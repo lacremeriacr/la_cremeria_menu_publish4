@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>La Cremería — Menú</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <header class="site-header">
+      <h1>La Cremería — Menú</h1>
+    </header>
+
+    <section class="menu">
+      <!-- Aquí va tu menú actual -->
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>La Cremería – Menú</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="brand">
+      <img src="imagenes/logo.jpg" alt="La Cremería" class="logo" />
+      <div class="brand-right">
+        <h1>La Cremería Menú</h1>
+        <h2>Arma tu vaso paso a paso</h2>
+
+        <nav class="social-icons">
+          <a href="https://instagram.com/lacremeriacr" target="_blank" aria-label="Instagram">
+            <img src="imagenes/instagram.svg" alt="Instagram">
+          </a>
+          <a href="https://www.tiktok.com/@lacremeria506" target="_blank" aria-label="TikTok">
+            <img src="imagenes/tiktok.svg" alt="TikTok">
+          </a>
+          <a href="https://wa.me/50683737202" target="_blank" aria-label="WhatsApp">
+            <img src="imagenes/whatsapp.svg" alt="WhatsApp">
+          </a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="grid">
+      <div>
+        <div class="card">
+          <div class="progress-bar"><div id="progress-fill"></div></div>
+          <div class="row-inline">
+            <span class="step-kicker">Paso <span id="progress-step">1</span> de 6</span>
+          </div>
+        </div>
+
+        <!-- PASO 1 -->
+        <section id="step-1" class="card step visible" data-step="1">
+          <div class="mobile-top-next">
+            <button class="cta cta--green" id="top-next-1" disabled>Siguiente</button>
+          </div>
+          <h3 class="sub step-title">¿Qué se te antoja hoy?</h3>
+          <div class="items" id="base-grid">
+            <button class="chip" data-group="base" data-id="fresas">
+              <img class="chip-img" src="imagenes/fresas.jpg" alt="Fresas con Crema" />
+              <p>Fresas con Crema</p>
+            </button>
+
+            <button class="chip" data-group="base" data-id="maracumango" data-price="4200" data-special="maracumango">
+              <img class="chip-img" src="imagenes/Maracumango.png" alt="Maracumango" />
+              <p>Maracumango</p>
+              <small>Incluye 2 toppings a elegir</small>
+              <span>₡4200</span>
+            </button>
+          </div>
+          <div class="wizard-nav">
+            <div></div>
+            <button class="cta cta--green" id="next-1" disabled>Siguiente</button>
+          </div>
+        </section>
+
+        <!-- PASO 2 -->
+        <section id="step-2" class="card step" data-step="2">
+          <div class="mobile-top-next">
+            <button class="cta cta--green" id="top-next-2" disabled>Siguiente</button>
+          </div>
+          <h3 class="sub step-title">Selecciona el tamaño</h3>
+          <div class="items items--size" id="size-grid">
+            <button class="chip" data-group="size" data-id="pequeno" data-price="1950" data-max-toppings="1">
+              <img class="chip-img" src="imagenes/pequeno.png" alt="Pequeño (9oz)" />
+              <p>Pequeño (9oz)</p>
+              <small>1 glaseado, 1 jarabe, Máx 1 topping</small>
+              <span>₡1950</span>
+            </button>
+            <button class="chip" data-group="size" data-id="mediano" data-price="2950" data-max-toppings="2">
+              <img class="chip-img" src="imagenes/mediano.png" alt="Mediano (12oz)" />
+              <p>Mediano (12oz)</p>
+              <small>1 glaseado, 1 jarabe, Máx 2 toppings</small>
+              <span>₡2950</span>
+            </button>
+            <button class="chip" data-group="size" data-id="grande" data-price="4950" data-max-toppings="3">
+              <img class="chip-img" src="imagenes/grande.png" alt="Grande (16oz)" />
+              <p>Grande (16oz)</p>
+              <small>1 glaseado, 1 jarabe, Máx 3 toppings</small>
+              <span>₡4950</span>
+            </button>
+            <button class="chip" data-group="size" data-id="extra_grande" data-price="6950" data-max-toppings="4">
+              <img class="chip-img" src="imagenes/extra_grande.png" alt="Familiar (32oz)" />
+              <p>Familiar (32oz)</p>
+              <small>1 glaseado, 1 jarabe, Máx 4 toppings</small>
+              <span>₡6950</span>
+            </button>
+          </div>
+          <div class="wizard-nav">
+            <button class="cta btn-back" id="back-2">Regresar</button>
+            <button class="cta cta--green" id="next-2" disabled>Siguiente</button>
+          </div>
+        </section>
+
+        <!-- PASO 3 -->
+        <section id="step-3" class="card step" data-step="3">
+          <div class="mobile-top-next">
+            <button class="cta cta--green" id="top-next-3" disabled>Siguiente</button>
+          </div>
+          <h3 class="sub step-title">Selecciona la crema</h3>
+          <div class="items" id="crema-grid">
+            <button class="chip" data-group="crema" data-id="vainilla_francesa"><img class="chip-img" src="imagenes/vainilla_francesa.png" alt="Vainilla Francesa" /><p>Vainilla Francesa</p></button>
+            <button class="chip" data-group="crema" data-id="kolita"><img class="chip-img" src="imagenes/kolita.png" alt="Kolita" /><p>Kolita</p></button>
+            <button class="chip" data-group="crema" data-id="coco"><img class="chip-img" src="imagenes/coco.png" alt="Coco" /><p>Coco</p></button>
+            <button class="chip" data-group="crema" data-id="irlandesa"><img class="chip-img" src="imagenes/irlandesa.png" alt="Irlandesa" /><p>Irlandesa</p></button>
+            <button class="chip" data-group="crema" data-id="maracuya"><img class="chip-img" src="imagenes/Maracuya.png" alt="Maracuyá" /><p>Maracuyá</p></button>
+          </div>
+          <div class="wizard-nav">
+            <button class="cta btn-back" id="back-3">Regresar</button>
+            <button class="cta cta--green" id="next-3" disabled>Siguiente</button>
+          </div>
+        </section>
+
+        <!-- PASO 4 -->
+        <section id="step-4" class="card step" data-step="4">
+          <div class="mobile-top-next">
+            <button class="cta cta--green" id="top-next-4">Siguiente</button>
+          </div>
+          <h3 class="sub step-title">¿Deseas agregar Glaseado?</h3>
+          <h4 class="sub step-title-with-limit" style="margin-top: 5px; font-size: 0.9rem;">(Glaseados opcionales)</h4>
+          <div class="items items--optional">
+              <button class="chip chip-nocarb" data-group="glaseado" data-id="sin_glaseado"><p>Sin Glaseado</p></button>
+          </div>
+          <div class="items" id="glaseado-grid">
+            <button class="chip" data-group="glaseado" data-id="leche_condensada"><img class="chip-img" src="imagenes/leche_condensada.png" alt="Leche Condensada" /><p>Leche Condensada</p></button>
+            <button class="chip" data-group="glaseado" data-id="dulce_de_leche"><img class="chip-img" src="imagenes/dulce_de_leche.png" alt="Dulce de Leche" /><p>Dulce de Leche</p></button>
+            <button class="chip" data-group="glaseado" data-id="mermelada_fresa"><img class="chip-img" src="imagenes/mermelada_fresa.png" alt="Mermelada artesanal de fresa" /><p>Mermelada artesanal de fresa</p></button>
+            <button class="chip" data-group="glaseado" data-id="nutella"><img class="chip-img" src="imagenes/nutella.png" alt="Nutella" /><p>Nutella</p></button>
+            <button class="chip" data-group="glaseado" data-id="crema_pistacho"><img class="chip-img" src="imagenes/crema_pistacho.png" alt="Crema de pistacho" /><p>Crema de pistacho</p></button>
+          </div>
+          <div class="wizard-nav">
+            <button class="cta btn-back" id="back-4">Regresar</button>
+            <button class="cta cta--green" id="next-4">Siguiente</button>
+          </div>
+        </section>
+
+        <!-- PASO 5 -->
+        <section id="step-5" class="card step" data-step="5">
+          <div class="mobile-top-next">
+            <button class="cta cta--green" id="top-next-5">Siguiente</button>
+          </div>
+          <h3 class="sub step-title">Selecciona tus toppings</h3>
+          <h4 class="sub step-title-with-limit" style="margin-top: 5px; font-size: 0.9rem;">(Máx 2, 3 o 4 según tamaño)</h4>
+          <div class="items items--optional">
+              <button class="chip chip-nocarb" data-group="topping" data-id="sin_topping"><p>Sin Topping</p></button>
+          </div>
+          <div class="items" id="topping-grid">
+            <button class="chip" data-group="topping" data-id="brownie"><img class="chip-img" src="imagenes/brownie.jpg" alt="Brownie" /><p>Brownie</p></button>
+            <button class="chip" data-group="topping" data-id="oreo"><img class="chip-img" src="imagenes/Oreo.jpg" alt="Oreo" /><p>Oreo</p></button>
+            <button class="chip" data-group="topping" data-id="marshmallows"><img class="chip-img" src="imagenes/marshmallows.jpg" alt="Mini Marshmallows" /><p>Mini Marshmallows</p></button>
+            <button class="chip" data-group="topping" data-id="gomitas"><img class="chip-img" src="imagenes/gomitas.jpg" alt="Gomitas" /><p>Gomitas</p></button>
+            <button class="chip" data-group="topping" data-id="bolitas_chocolate"><img class="chip-img" src="imagenes/bolitas_chocolate.jpg" alt="Bolitas de Chocolate" /><p>Bolitas de Chocolate</p></button>
+            <button class="chip" data-group="topping" data-id="almendras"><img class="chip-img" src="imagenes/almendras.jpg" alt="Almendras" /><p>Almendras</p></button>
+            <button class="chip" data-group="topping" data-id="sorbeto_wafer"><img class="chip-img" src="imagenes/sorbeto.jpg" alt="Sorbeto/Wafer" /><p>Sorbeto/Wafer</p></button>
+            <button class="chip" data-group="topping" data-id="granola"><img class="chip-img" src="imagenes/Granola.jpg" alt="Granola" /><p>Granola</p></button>
+            <button class="chip" data-group="topping" data-id="mani_picado"><img class="chip-img" src="imagenes/mani.jpg" alt="Maní Picado" /><p>Maní Picado</p></button>
+            <button class="chip" data-group="topping" data-id="arandanos" data-price="200"><img class="chip-img" src="imagenes/arandanos.jpg" alt="Arándanos" /><p>Arándanos</p><span>+₡200</span></button>
+            <button class="chip" data-group="topping" data-id="queso_rayado" data-price="300"><img class="chip-img" src="imagenes/queso_rayado.jpg" alt="Queso Rayado" /><p>Queso Rayado</p><span>+₡300</span></button>
+          </div>
+          <div class="wizard-nav">
+            <button class="cta btn-back" id="back-5">Regresar</button>
+            <button class="cta cta--green" id="next-5">Siguiente</button>
+          </div>
+        </section>
+
+        <!-- PASO 6 -->
+        <section id="step-6" class="card step" data-step="6">
+          <h3 class="sub step-title">Selecciona el jarabe</h3>
+          <h4 class="sub step-title-with-limit" style="margin-top: 5px; font-size: 0.9rem;">(Jarabes opcionales)</h4>
+          <div class="items items--optional">
+              <button class="chip chip-nocarb" data-group="jarabe" data-id="sin_jarabe"><p>Sin Jarabe</p></button>
+          </div>
+          <div class="items" id="jarabe-grid">
+            <button class="chip" data-group="jarabe" data-id="chocolate"><img class="chip-img" src="imagenes/jarabe_chocolate.png" alt="Chocolate" /><p>Chocolate</p></button>
+            <button class="chip" data-group="jarabe" data-id="caramelo"><img class="chip-img" src="imagenes/jarabe_caramelo.png" alt="Caramelo" /><p>Caramelo</p></button>
+            <button class="chip" data-group="jarabe" data-id="fresa"><img class="chip-img" src="imagenes/jarabe_fresa.png" alt="Fresa" /><p>Fresa</p></button>
+            <button class="chip" data-group="jarabe" data-id="maracuya_pasion"><img class="chip-img" src="imagenes/jarabe_maracuya.png" alt="Maracuyá Pasión" /><p>Maracuyá Pasión</p></button>
+            <button class="chip special-jarabe" data-group="jarabe" data-id="ganache_chocolate" data-price="400"><img class="chip-img" src="imagenes/ganache_chocolate.jpg" alt="Ganache de Chocolate" /><p>Ganache de Chocolate</p><span>+₡400</span></button>
+            <button class="chip special-jarabe" data-group="jarabe" data-id="crema_pistacho_s" data-price="400"><img class="chip-img" src="imagenes/crema_pistacho.png" alt="Crema de Pistacho" /><p>Crema de Pistacho</p><span>+₡400</span></button>
+            <button class="chip special-jarabe" data-group="jarabe" data-id="dulce_de_leche_s" data-price="400"><img class="chip-img" src="imagenes/dulce_de_leche.png" alt="Dulce de Leche" /><p>Dulce de Leche</p><span>+₡400</span></button>
+            <button class="chip special-jarabe" data-group="jarabe" data-id="leche_condensada_s" data-price="400"><img class="chip-img" src="imagenes/leche_condensada.png" alt="Leche Condensada" /><p>Leche Condensada</p><span>+₡400</span></button>
+          </div>
+          <div class="wizard-nav">
+            <button class="cta btn-back" id="back-6">Regresar</button>
+            <button class="cta cta--green" id="add-to-order">Agregar al pedido</button>
+          </div>
+        </section>
+      </div>
+
+      <aside class="summary-panel">
+        <div class="total-row">Total: <strong id="total-top">₡0</strong></div>
+
+        <div id="current-summary-container" class="summary current">
+          <div style="color:#e6007e;font-weight:600;padding-bottom:8px;">Tu selección actual:</div>
+          <div id="current-summary"></div>
+        </div>
+
+        <div id="order-summary-title">Pedidos Agregados:</div>
+        <div id="summary"></div>
+
+        <div class="total-row">Total del Pedido: <strong id="total-bottom">₡0</strong></div>
+        <div class="summary-actions">
+          <button id="btn-make-order" class="cta cta--green">Enviar pedido por WhatsApp</button>
+          <button id="btn-clear-all" class="cta cta--red-outline">Borrar todo</button>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div id="mobile-total-sticky" class="mobile-total-sticky">
+      <div id="mobile-summary-details">Arma tu primer pedido</div>
+      <strong id="total-mobile">₡0</strong>
+      <div id="mobile-summary-actions"></div>
+  </div>
+
+  <script src="script.js"></script>
+<script>
+  // si usas Vite, ya existe import.meta.env; si no, expón una variable para el script
+  window.importMetaEnv = { VITE_API_URL: "http://localhost:4242" };
+</script>
+<script src="payments.js"></script>
+</body>
+</html>
+
+    </section>
+
+    <aside class="summary">
+      <h2>Resumen del pedido</h2>
+      <div class="summary-actions">
+        <!-- payments.js insertará el selector de banco y botón aquí -->
+      </div>
+    </aside>
+  </main>
+
+  <!-- Config y scripts -->
+  <script>window.importMetaEnv={VITE_API_URL:"http://localhost:4242"}</script>
+  <script src="payments.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+/* -------------------- GENERAL -------------------- */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #fffafc;
+  color: #222;
+}
+img { max-width: 100%; display: block; }
+
+/* -------------------- HEADER -------------------- */
+.hero {
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  padding: 12px 16px;
+  display: flex;
+  justify-content: center;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.logo { width: 150px; height: auto; }
+.brand-right h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #e6007e;
+}
+.brand-right h2 {
+  margin: 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* -------------------- SOCIAL ICONS -------------------- */
+.social-icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+.social-icons a {
+  display: inline-flex;
+  width: 32px; 
+  height: 32px; 
+  color: #e6007e;
+}
+
+/* -------------------- LAYOUT Y CARD -------------------- */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+.card {
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.sub {
+  color: #e6007e;
+  font-weight: 600;
+}
+.step {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  min-height: 400px;
+}
+.step.visible {
+  display: block;
+  opacity: 1;
+}
+
+/* -------------------- PROGRESS BAR -------------------- */
+.progress-bar {
+  height: 8px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+#progress-fill {
+  height: 100%;
+  background: #e6007e;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  width: 0%;
+}
+.row-inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.step-kicker {
+  font-size: 0.9rem;
+  color: #777;
+  font-weight: 500;
+}
+
+/* -------------------- CHIPS -------------------- */
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+  transition: opacity 0.3s ease;
+}
+.items--size {
+  gap: 20px;
+  justify-content: center;
+}
+.chip {
+  flex-basis: 150px;
+  background: #fcfcfc;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.chip-img {
+  width: 100%;
+  height: 140px;             /* ⇦ Alto suficiente para verse completa */
+  object-fit: contain;       /* ⇦ Se ve completa, sin recorte */
+  object-position: center;   /* ⇦ Centrada */
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background: #fff;          /* ⇦ Fondo neutro por si no llena */
+}
+.chip p {
+  margin: 4px 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #222;
+  line-height: 1.2;
+}
+.chip small { font-size: 0.75rem; color: #888; display: block; }
+.chip span  { font-size: 0.8rem;  color: #e6007e; font-weight: 700; margin-top: 4px; }
+
+.chip.selected {
+  border-color: #e6007e;
+  background: #fff0f7;
+  box-shadow: 0 4px 8px rgba(230, 0, 126, 0.2);
+}
+
+/* Tamaños (Paso 2) */
+.items--size .chip { flex-basis: 180px; }
+.items--size .chip-img { height: 140px; object-fit: contain; }
+
+/* Botón “Sin …” */
+.chip-nocarb {
+  flex-basis: auto;
+  background: #f5f5f5;
+  border-color: #ccc;
+  padding: 8px 15px;
+}
+.chip-nocarb p {
+  font-size: 0.9rem; font-weight: 500; margin: 0; color: #555;
+}
+.chip-nocarb.selected {
+  background: #e6007e; color: #fff; border-color: #e6007e;
+}
+.chip-nocarb.selected p { color: #fff; }
+
+/* -------------------- NAV / CTA -------------------- */
+.wizard-nav {
+  display: flex; justify-content: space-between;
+  padding-top: 20px; margin-top: 10px; border-top: 1px solid #f0f0f0;
+}
+.cta {
+  padding: 10px 20px; border: none; border-radius: 8px;
+  font-weight: 600; cursor: pointer; transition: background .2s ease, opacity .2s ease;
+}
+.cta--xsmall { padding: 4px 8px;  font-size: 0.75rem; font-weight: 500; }
+.cta--small  { padding: 8px 12px; font-size: 0.85rem; }
+.cta--green  { background: #10B981; color: #fff; }
+.cta--green:hover:not(:disabled) { background: #059669; }
+.cta--blue   { background: #3B82F6; color: #fff; }
+.cta--blue:hover:not(:disabled) { background: #2563EB; }
+.cta--red    { background: #EF4444; color: #fff; }
+.cta--red:hover:not(:disabled) { background: #DC2626; }
+.cta--red-outline { background: transparent; border: 2px solid #EF4444; color: #EF4444; }
+.cta--red-outline:hover:not(:disabled) { background: #FEF2F2; }
+.cta--orange-outline { background: transparent; border: 2px solid #F59E0B; color: #F59E0B; }
+.cta--orange-outline:hover:not(:disabled) { background: #FFFBEB; }
+.cta:disabled { opacity: .5; cursor: not-allowed; }
+.btn-back { background: #f3f4f6; color: #4B5563; }
+.btn-back:hover { background: #e5e7eb; }
+
+/* -------------------- BOTÓN SUPERIOR (MÓVIL) -------------------- */
+.mobile-top-next {
+  display: none;
+  margin-bottom: 8px;
+}
+@media (max-width: 768px) {
+  .mobile-top-next { display: flex; justify-content: flex-end; }
+}
+
+/* -------------------- RESUMEN -------------------- */
+.summary-panel {
+  position: sticky; top: 20px;
+  background: #fff; padding: 20px; border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05); height: fit-content;
+}
+.total-row {
+  font-size: 1.2rem; padding: 8px 0; border-top: 1px solid #eee;
+  margin-top: 8px; display: flex; justify-content: space-between;
+}
+.total-row:first-child { border-top: none; margin-top: 0; }
+.summary strong { color: #e6007e; }
+#order-summary-title { font-weight: 600; margin-top: 15px; padding-top: 10px; border-top: 1px solid #f0f0f0; }
+.summary-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+.summary-actions .cta { width: 100%; }
+
+/* -------------------- MOBILE FOOTER -------------------- */
+.mobile-total-sticky {
+  position: fixed; bottom: 0; left: 0; width: 100%;
+  background: #fff; border-top: 1px solid #f0f0f0; padding: 10px 16px;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 1000;
+  display: flex; justify-content: space-between; align-items: center;
+}
+#mobile-summary-details { flex-basis: 40%; font-size: 0.8rem; color: #555; line-height: 1.2; }
+#total-mobile { flex-basis: 20%; font-size: 1.1rem; font-weight: 700; color: #e6007e; text-align: right; }
+#mobile-summary-actions { flex-basis: 40%; display: flex; justify-content: flex-end; gap: 8px; }
+.mobile-total-sticky .cta { white-space: nowrap; }
+
+/* -------------------- MEDIA -------------------- */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; gap: 0; }
+  .container { padding-bottom: 80px; }
+  .chip { flex-basis: 45%; }
+  .chip-img { height: 120px; } /* más compacto en móvil */
+}
