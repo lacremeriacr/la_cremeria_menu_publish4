@@ -25,7 +25,13 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    # El sitio es estático: verificar que los scripts del menú no tengan errores de sintaxis
+    - name: Check JavaScript syntax
+      run: for f in $(git ls-files '*.js'); do node --check "$f"; done
+    # Solo si algún día se agrega un package.json
+    - if: hashFiles('package.json') != ''
+      run: npm install --no-audit --no-fund
+    - if: hashFiles('package.json') != ''
+      run: npm run build --if-present
+    - if: hashFiles('package.json') != ''
+      run: npm test --if-present
