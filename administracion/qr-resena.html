@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<!-- ARTIFACT-HEAD-START -->
+<title>QR Reseñas La Cremería</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap">
+<style>
+  /* Layout: dos columnas (formulario | vista previa de la tarjeta impresa); una columna en el celular. */
+  :root {
+    --fresa: #c0333a;        /* rojo del logo */
+    --fresa-hondo: #9e262c;
+    --hoja: #6f9e2a;         /* verde "Sabor Pasión", oscurecido para texto */
+    --crema: #fff7ef;
+    --bg: #fdfaf8;
+    --panel: #ffffff;
+    --fg: #2a1a1b;
+    --muted: #6e5d5e;
+    --line: #ecdfdc;
+    --campo: #ffffff;
+    --ok: #3f7d1f;
+    --aviso: #a35c00;
+    --error: #b3261e;
+    --sombra: 0 1px 2px rgba(60, 20, 20, .06), 0 8px 24px rgba(60, 20, 20, .06);
+    --font: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --fresa: #ef6b70; --fresa-hondo: #f48f93; --hoja: #a9d65c; --crema: #2b1f1f;
+      --bg: #181213; --panel: #221a1b; --fg: #f6eceb; --muted: #bfaeae; --line: #3a2d2e;
+      --campo: #1c1516; --ok: #8fd36a; --aviso: #f0b45a; --error: #ff8a80;
+      --sombra: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --fresa: #ef6b70; --fresa-hondo: #f48f93; --hoja: #a9d65c; --crema: #2b1f1f;
+    --bg: #181213; --panel: #221a1b; --fg: #f6eceb; --muted: #bfaeae; --line: #3a2d2e;
+    --campo: #1c1516; --ok: #8fd36a; --aviso: #f0b45a; --error: #ff8a80;
+    --sombra: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-block: 24px 48px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  header.top {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    margin-bottom: 22px;
+  }
+  header.top .sello {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: #fff url("../imagenes/logo.jpg") 9% 48% / 300% auto no-repeat;
+    border: 2px solid var(--line); flex: none;
+  }
+  header.top h1 {
+    margin: 0; font-size: 1.6rem; line-height: 1.15; font-weight: 800;
+    color: var(--fresa); text-wrap: balance;
+  }
+  header.top p { margin: 2px 0 0; color: var(--muted); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+    gap: 28px;
+    align-items: start;
+  }
+  @media (max-width: 820px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+
+  .bloque {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px;
+    display: grid; gap: 14px;
+    min-width: 0;
+  }
+  .col { display: grid; gap: 18px; min-width: 0; }
+  .bloque h2 {
+    margin: 0; font-size: .78rem; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600;
+  }
+  label { display: grid; gap: 6px; font-weight: 500; }
+  label small { font-weight: 400; color: var(--muted); }
+  input[type="text"], input[type="url"] {
+    width: 100%; min-width: 0;
+    font: inherit; color: var(--fg);
+    background: var(--campo);
+    border: 1.5px solid var(--line); border-radius: 10px;
+    padding: 11px 12px;
+  }
+  input:focus-visible, button:focus-visible, a:focus-visible, summary:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--fresa) 45%, transparent);
+    outline-offset: 2px;
+  }
+  input#enlace { font-size: 14px; }
+  .estado { margin: 0; font-size: .9rem; min-height: 1.4em; }
+  .estado.ok { color: var(--ok); }
+  .estado.aviso { color: var(--aviso); }
+  .estado.error { color: var(--error); }
+  .fila { display: flex; flex-wrap: wrap; gap: 10px; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font: inherit; font-weight: 600; font-size: .92rem;
+    padding: 10px 16px; border-radius: 999px; cursor: pointer;
+    border: 1.5px solid var(--fresa); background: var(--fresa); color: #fff;
+    text-decoration: none;
+    transition: background .15s ease, transform .1s ease;
+  }
+  .btn:hover { background: var(--fresa-hondo); border-color: var(--fresa-hondo); }
+  .btn:active { transform: translateY(1px); }
+  .btn.sec { background: transparent; color: var(--fresa); }
+  .btn.sec:hover { background: color-mix(in srgb, var(--fresa) 10%, transparent); }
+  .btn[aria-disabled="true"], .btn:disabled {
+    opacity: .45; cursor: not-allowed; pointer-events: none;
+  }
+
+  details.pasos {
+    border: 1px dashed var(--line); border-radius: 10px; padding: 10px 14px;
+    background: var(--crema);
+  }
+  details.pasos summary { cursor: pointer; font-weight: 600; color: var(--fresa); }
+  details.pasos ol { margin: 10px 0 4px; padding-left: 20px; display: grid; gap: 6px; }
+  details.pasos code {
+    font-size: .85em; background: var(--panel); border: 1px solid var(--line);
+    padding: 1px 5px; border-radius: 5px; word-break: break-all;
+  }
+  details.pasos p { margin: 8px 0 0; color: var(--muted); font-size: .9rem; }
+
+  .vista { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); }
+  .tarjeta-img {
+    width: 100%; max-width: 100%; height: auto; display: block;
+    border-radius: 10px; box-shadow: var(--sombra);
+    background: #fff; aspect-ratio: 2 / 3;
+  }
+  .qr-img {
+    width: 132px; height: 132px; display: block; border-radius: 8px;
+    box-shadow: var(--sombra); background: #fff; flex: none;
+  }
+  .extra { display: flex; gap: 14px; align-items: center; }
+  .extra p { margin: 0; color: var(--muted); font-size: .88rem; }
+  .nota { margin: 0; color: var(--muted); font-size: .86rem; }
+
+  @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+
+  @media print {
+    @page { size: 4in 6in; margin: 0; }
+    body { background: #fff; }
+    .wrap > *:not(.grid), .grid > .col:first-child, .vista > :not(.tarjeta-img) { display: none !important; }
+    .wrap, .grid, .vista { display: block; padding: 0; margin: 0; max-width: none; position: static; }
+    .tarjeta-img { width: 4in; height: 6in; box-shadow: none; border-radius: 0; }
+  }
+</style>
+<!-- ARTIFACT-HEAD-END -->
+</head>
+<body>
+<!-- ARTIFACT-BODY-START -->
+<div class="wrap">
+  <header class="top">
+    <div class="sello" role="img" aria-label="Logo de La Cremería"></div>
+    <div>
+      <h1>QR para reseñas en Google</h1>
+      <p>Pega el enlace de reseñas de tu negocio y descarga la tarjeta lista para el mostrador.</p>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div class="col">
+      <section class="bloque" aria-labelledby="t-enlace">
+        <h2 id="t-enlace">1 · Enlace de reseñas</h2>
+        <label for="enlace">
+          Enlace de Google para dejar reseña
+          <small>Sirve el enlace corto de "Pedir reseñas" o el ID de lugar (empieza con ChIJ).</small>
+          <input id="enlace" type="url" inputmode="url" autocomplete="off" spellcheck="false"
+                 placeholder="https://g.page/r/XXXXXXXXXXXX/review" />
+        </label>
+        <p id="estado" class="estado" role="status" aria-live="polite"></p>
+        <div class="fila">
+          <a id="probar" class="btn sec" href="#" target="_blank" rel="noopener" aria-disabled="true">Probar enlace</a>
+          <button id="copiar" class="btn sec" type="button" disabled>Copiar enlace</button>
+        </div>
+        <details class="pasos" id="pasos" open>
+          <summary>¿Dónde consigo el enlace?</summary>
+          <ol>
+            <li>En el celular, abre Google Maps con la cuenta de Google que administra La Cremería.</li>
+            <li>Toca tu foto de perfil y entra a <strong>Tu Perfil de Negocio</strong> (o busca "La Cremería" en Google estando conectado).</li>
+            <li>Toca <strong>Pedir reseñas</strong> (también puede decir "Obtener más reseñas" o "Compartir formulario de reseñas").</li>
+            <li>Copia el enlace. Se ve así: <code>https://g.page/r/CXXXXXXXXXXXX/review</code></li>
+            <li>Pégalo arriba. El QR se actualiza al instante.</li>
+          </ol>
+          <p>Otra opción: busca tu negocio en el "Place ID Finder" de Google y pega aquí el ID (empieza con <code>ChIJ</code>). La página arma el enlace de reseña por ti.</p>
+        </details>
+      </section>
+
+      <section class="bloque" aria-labelledby="t-textos">
+        <h2 id="t-textos">2 · Textos de la tarjeta</h2>
+        <label for="titulo">Título
+          <input id="titulo" type="text" maxlength="40" value="¿Te gustó tu vaso?" />
+        </label>
+        <label for="subtitulo">Subtítulo
+          <input id="subtitulo" type="text" maxlength="50" value="Déjanos tu reseña en Google" />
+        </label>
+        <label for="pie">Franja inferior
+          <input id="pie" type="text" maxlength="40" value="¡Gracias por tu visita!" />
+        </label>
+        <label for="usuario">Usuario de redes
+          <input id="usuario" type="text" maxlength="30" value="@lacremeriacr" />
+        </label>
+      </section>
+    </div>
+
+    <aside class="col vista" aria-labelledby="t-vista">
+      <section class="bloque">
+        <h2 id="t-vista">3 · Vista previa</h2>
+        <img id="tarjeta" class="tarjeta-img" alt="Tarjeta con el código QR para dejar una reseña en Google" width="1200" height="1800" />
+        <!-- DESCARGAS-START -->
+        <div class="fila">
+          <a id="bajarTarjeta" class="btn" href="#" download="la-cremeria-qr-resena-tarjeta.png" aria-disabled="true">Descargar tarjeta</a>
+          <a id="bajarQR" class="btn sec" href="#" download="la-cremeria-qr-resena.png" aria-disabled="true">Descargar solo QR</a>
+          <button id="imprimir" class="btn sec" type="button" disabled>Imprimir</button>
+        </div>
+        <!-- DESCARGAS-END -->
+        <div class="extra">
+          <img id="qrSolo" class="qr-img" alt="Solo el código QR" width="1000" height="1000" />
+          <p>Solo el QR, para pegarlo en el menú, la factura o la vitrina.</p>
+        </div>
+        <p class="nota" id="nota">La tarjeta mide 4 × 6 pulgadas a 300 ppp (10 × 15 cm). Para guardarla: en el celular, mantén presionada la imagen; en la computadora, clic derecho y "Guardar imagen como".</p>
+      </section>
+    </aside>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+(function () {
+  // Si ya tienes el enlace, pégalo aquí y la página lo mostrará siempre de entrada.
+  var ENLACE_PREDETERMINADO = "";
+  var LOGO_SRC = "../imagenes/logo.jpg";
+  var EJEMPLO = "https://g.page/r/EJEMPLO-pega-tu-enlace/review";
+
+  var COLOR = { fresa: "#c0333a", fresaHondo: "#9e262c", hoja: "#98c745", tinta: "#241416", gris: "#6e5d5e", estrella: "#f4b400", crema: "#fff7ef" };
+  var CLAVE = "lacremeria-qr-resena";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var campos = ["enlace", "titulo", "subtitulo", "pie", "usuario"];
+
+  // ---------- Guardar lo escrito en este navegador ----------
+  function leerGuardado() {
+    try { return JSON.parse(localStorage.getItem(CLAVE) || "{}") || {}; } catch (e) { return {}; }
+  }
+  function guardar() {
+    try {
+      var d = {};
+      campos.forEach(function (c) { d[c] = $(c).value; });
+      localStorage.setItem(CLAVE, JSON.stringify(d));
+    } catch (e) { /* sin almacenamiento: no pasa nada */ }
+  }
+
+  // ---------- Interpretar lo que pegó el usuario ----------
+  function interpretar(texto) {
+    var t = (texto || "").trim();
+    if (!t) return { tipo: "vacio" };
+    var m = t.match(/(ChIJ[A-Za-z0-9_-]{10,})/);
+    if (m && !/^https?:\/\//i.test(t)) {
+      return { tipo: "ok", url: "https://search.google.com/local/writereview?placeid=" + m[1], msg: "ID de lugar reconocido. Armé el enlace de reseña de Google." };
+    }
+    if (!/^https?:\/\//i.test(t) && /^[\w.-]+\.[a-z]{2,}(\/|$)/i.test(t)) t = "https://" + t;
+    var u;
+    try { u = new URL(t); } catch (e) {
+      return { tipo: "error", msg: "Eso no es un enlace. Copia el enlace completo desde \"Pedir reseñas\" en tu Perfil de Negocio." };
+    }
+    var host = u.hostname.toLowerCase();
+    var esGoogle = /(^|\.)g\.page$/.test(host) || /(^|\.)goo\.gl$/.test(host) || /(^|\.)google\.[a-z.]+$/.test(host);
+    if (!esGoogle) {
+      return { tipo: "aviso", url: u.href, msg: "Este enlace no es de Google. El QR funciona, pero revisa que lleve a tu formulario de reseñas." };
+    }
+    if (/\/review\/?$/.test(u.pathname) || /writereview/.test(u.href)) {
+      return { tipo: "ok", url: u.href, msg: "Enlace de reseñas de Google listo." };
+    }
+    return { tipo: "aviso", url: u.href, msg: "Es un enlace de Google, pero no parece el de reseñas. El enlace de \"Pedir reseñas\" termina en /review." };
+  }
+
+  // ---------- Dibujo ----------
+  function matrizQR(texto) {
+    var qr = qrcode(0, "Q");
+    qr.addData(texto);
+    qr.make();
+    return qr;
+  }
+  function dibujarQR(ctx, qr, x, y, lado, color) {
+    var n = qr.getModuleCount();
+    var paso = lado / n;
+    ctx.fillStyle = color;
+    for (var r = 0; r < n; r++) {
+      for (var c = 0; c < n; c++) {
+        if (qr.isDark(r, c)) {
+          // Redondeo a píxeles enteros para bordes nítidos
+          var x0 = Math.round(x + c * paso), y0 = Math.round(y + r * paso);
+          var x1 = Math.round(x + (c + 1) * paso), y1 = Math.round(y + (r + 1) * paso);
+          ctx.fillRect(x0, y0, x1 - x0, y1 - y0);
+        }
+      }
+    }
+  }
+  function rectRedondo(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+  function estrella(ctx, cx, cy, rExt, rInt) {
+    ctx.beginPath();
+    for (var i = 0; i < 10; i++) {
+      var a = -Math.PI / 2 + i * Math.PI / 5;
+      var rr = i % 2 === 0 ? rExt : rInt;
+      var px = cx + Math.cos(a) * rr, py = cy + Math.sin(a) * rr;
+      if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+    ctx.fill();
+  }
+  function textoAjustado(ctx, texto, x, y, maxAncho, tam, peso, color) {
+    var t = tam;
+    do {
+      ctx.font = peso + " " + t + "px Poppins, system-ui, sans-serif";
+      t -= 2;
+    } while (ctx.measureText(texto).width > maxAncho && t > 20);
+    ctx.fillStyle = color;
+    ctx.fillText(texto, x, y);
+  }
+  function marcaEjemplo(ctx, w, h, tam) {
+    ctx.save();
+    ctx.translate(w / 2, h / 2);
+    ctx.rotate(-Math.PI / 6);
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = "800 " + tam + "px Poppins, system-ui, sans-serif";
+    ctx.lineWidth = tam / 14;
+    ctx.strokeStyle = "rgba(255,255,255,.9)";
+    ctx.strokeText("EJEMPLO", 0, 0);
+    ctx.fillStyle = "rgba(192,51,58,.82)";
+    ctx.fillText("EJEMPLO", 0, 0);
+    ctx.font = "600 " + Math.round(tam * 0.22) + "px Poppins, system-ui, sans-serif";
+    ctx.lineWidth = tam / 30;
+    ctx.strokeText("Pega tu enlace para el QR real", 0, tam * 0.62);
+    ctx.fillText("Pega tu enlace para el QR real", 0, tam * 0.62);
+    ctx.restore();
+  }
+
+  function dibujarTarjeta(qr, logo, textos, esEjemplo) {
+    var W = 1200, H = 1800;
+    var cv = document.createElement("canvas");
+    cv.width = W; cv.height = H;
+    var ctx = cv.getContext("2d");
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, W, H);
+    ctx.textAlign = "center";
+    ctx.textBaseline = "alphabetic";
+
+    // Logo (recortado a su contenido)
+    if (logo) {
+      var sx = 132, sy = 137, sw = 1319, sh = 680;
+      var lw = 700, lh = Math.round(lw * sh / sw);
+      ctx.drawImage(logo, sx, sy, sw, sh, (W - lw) / 2, 70, lw, lh);
+    }
+
+    // Título y subtítulo
+    textoAjustado(ctx, textos.titulo, W / 2, 530, W - 140, 88, "800", COLOR.fresa);
+    textoAjustado(ctx, textos.subtitulo, W / 2, 608, W - 160, 50, "500", COLOR.tinta);
+
+    // Cinco estrellas
+    ctx.fillStyle = COLOR.estrella;
+    for (var i = 0; i < 5; i++) estrella(ctx, W / 2 + (i - 2) * 92, 680, 36, 15);
+
+    // Panel del QR
+    var panel = 760, px = (W - panel) / 2, py = 750;
+    rectRedondo(ctx, px, py, panel, panel, 44);
+    ctx.fillStyle = "#ffffff"; ctx.fill();
+    ctx.lineWidth = 10; ctx.strokeStyle = COLOR.fresa; ctx.stroke();
+    var n = qr.getModuleCount();
+    var lado = Math.floor((panel - 100) / n) * n; // módulos de tamaño entero
+    dibujarQR(ctx, qr, px + (panel - lado) / 2, py + (panel - lado) / 2, lado, COLOR.tinta);
+
+    // Instrucción
+    ctx.font = "500 38px Poppins, system-ui, sans-serif";
+    ctx.fillStyle = COLOR.gris;
+    ctx.fillText("Escanea con la cámara de tu celular", W / 2, 1585);
+
+    // Franja inferior con borde ondulado (como crema que escurre)
+    var yb = 1640;
+    ctx.beginPath();
+    ctx.moveTo(0, H);
+    ctx.lineTo(0, yb);
+    var ondas = 8, ancho = W / ondas;
+    for (var k = 0; k < ondas; k++) {
+      var x0 = k * ancho;
+      ctx.quadraticCurveTo(x0 + ancho / 4, yb - 18, x0 + ancho / 2, yb);
+      ctx.quadraticCurveTo(x0 + 3 * ancho / 4, yb + 18, x0 + ancho, yb);
+    }
+    ctx.lineTo(W, H);
+    ctx.closePath();
+    ctx.fillStyle = COLOR.fresa;
+    ctx.fill();
+    textoAjustado(ctx, textos.pie, W / 2, 1722, W - 120, 52, "800", "#ffffff");
+    if (textos.usuario) {
+      ctx.font = "500 32px Poppins, system-ui, sans-serif";
+      ctx.fillStyle = "rgba(255,255,255,.9)";
+      ctx.fillText("·  " + textos.usuario + "  ·", W / 2, 1772);
+    }
+
+    if (esEjemplo) marcaEjemplo(ctx, W, H, 230);
+    return cv;
+  }
+
+  function dibujarSoloQR(qr, esEjemplo) {
+    var n = qr.getModuleCount();
+    var margen = 4; // zona de silencio estándar
+    var tamMod = Math.floor(1000 / (n + margen * 2));
+    var lado = tamMod * (n + margen * 2);
+    var cv = document.createElement("canvas");
+    cv.width = lado; cv.height = lado;
+    var ctx = cv.getContext("2d");
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, lado, lado);
+    dibujarQR(ctx, qr, tamMod * margen, tamMod * margen, tamMod * n, "#000000");
+    if (esEjemplo) marcaEjemplo(ctx, lado, lado, 190);
+    return cv;
+  }
+
+  // ---------- Estado de la página ----------
+  var logoImg = null;
+  var urlActual = "";
+
+  function deshabilitar(el, si) {
+    if (!el) return;
+    if (el.tagName === "BUTTON") el.disabled = si;
+    else el.setAttribute("aria-disabled", si ? "true" : "false");
+  }
+
+  function actualizar() {
+    var r = interpretar($("enlace").value);
+    var estado = $("estado");
+    estado.className = "estado";
+    if (r.tipo === "vacio") {
+      estado.textContent = "Mientras no pegues tu enlace, la tarjeta muestra un QR de ejemplo que no sirve para imprimir.";
+    } else {
+      estado.textContent = r.msg;
+      estado.classList.add(r.tipo);
+    }
+
+    var valido = r.tipo === "ok" || r.tipo === "aviso";
+    urlActual = valido ? r.url : "";
+    var esEjemplo = !valido;
+    var qr = matrizQR(valido ? r.url : EJEMPLO);
+    var textos = {
+      titulo: $("titulo").value.trim() || "¿Te gustó tu vaso?",
+      subtitulo: $("subtitulo").value.trim() || "Déjanos tu reseña en Google",
+      pie: $("pie").value.trim() || "¡Gracias por tu visita!",
+      usuario: $("usuario").value.trim()
+    };
+
+    var tarjeta = dibujarTarjeta(qr, logoImg, textos, esEjemplo).toDataURL("image/png");
+    var solo = dibujarSoloQR(qr, esEjemplo).toDataURL("image/png");
+    $("tarjeta").src = tarjeta;
+    $("qrSolo").src = solo;
+
+    var probar = $("probar");
+    probar.href = valido ? r.url : "#";
+    deshabilitar(probar, !valido);
+    deshabilitar($("copiar"), !valido);
+
+    var bt = $("bajarTarjeta"), bq = $("bajarQR"), imp = $("imprimir");
+    if (bt) { bt.href = valido ? tarjeta : "#"; deshabilitar(bt, !valido); }
+    if (bq) { bq.href = valido ? solo : "#"; deshabilitar(bq, !valido); }
+    deshabilitar(imp, !valido);
+
+    if (valido) $("pasos").open = false;
+    guardar();
+  }
+
+  function copiar() {
+    if (!urlActual) return;
+    var ok = function () { $("estado").textContent = "Enlace copiado."; $("estado").className = "estado ok"; };
+    var respaldo = function () { var c = $("enlace"); c.focus(); c.select(); };
+    try {
+      navigator.clipboard.writeText(urlActual).then(ok, respaldo);
+    } catch (e) { respaldo(); }
+  }
+
+  // ---------- Arranque ----------
+  var guardado = leerGuardado();
+  campos.forEach(function (c) {
+    if (typeof guardado[c] === "string" && (c === "enlace" ? guardado[c] : guardado[c].trim())) $(c).value = guardado[c];
+    $(c).addEventListener("input", actualizar);
+  });
+  if (!$("enlace").value && ENLACE_PREDETERMINADO) $("enlace").value = ENLACE_PREDETERMINADO;
+  $("copiar").addEventListener("click", copiar);
+  if ($("imprimir")) $("imprimir").addEventListener("click", function () { window.print(); });
+  ["probar", "bajarTarjeta", "bajarQR"].forEach(function (id) {
+    var el = $(id);
+    if (el) el.addEventListener("click", function (e) { if (el.getAttribute("aria-disabled") === "true") e.preventDefault(); });
+  });
+
+  function iniciar() {
+    actualizar();
+    var img = new Image();
+    img.onload = function () { logoImg = img; actualizar(); };
+    img.src = LOGO_SRC;
+  }
+  var fuentes = (document.fonts && document.fonts.load)
+    ? Promise.all([
+        document.fonts.load('800 88px "Poppins"'),
+        document.fonts.load('500 50px "Poppins"'),
+        document.fonts.load('600 40px "Poppins"')
+      ]).catch(function () {})
+    : Promise.resolve();
+  var listo = false;
+  var arrancar = function () { if (!listo) { listo = true; iniciar(); } };
+  fuentes.then(function () { if (listo) actualizar(); else arrancar(); });
+  setTimeout(arrancar, 1500); // por si las fuentes tardan; se redibuja cuando lleguen
+})();
+</script>
+<!-- ARTIFACT-BODY-END -->
+</body>
+</html>
